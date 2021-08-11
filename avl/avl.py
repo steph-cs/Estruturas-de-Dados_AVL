@@ -43,10 +43,13 @@ class TreeMap(LinkedBinaryTree, MapBase):
       leaf = self._add_root(self._Item(k,v)) # from LinkedBinaryTree
     else:
         p = self._subtree_search(self.root(),v)
+       
         item = self._Item(k,v)
         if v < p.value():
+          
           leaf = self._add_left(p, item) # inherited from LinkedBinaryTree
         else:
+         
           leaf = self._add_right(p, item) # inherited from LinkedBinaryTree
     self._rebalance(leaf) # hook for balanced tree subclasses
 
@@ -68,17 +71,19 @@ class TreeMap(LinkedBinaryTree, MapBase):
         p = self.after(p)
 
   def balanced(self,p):
+    k = False
     h1 = 0
     h2 = 0
     for i in self.children(p):
-      if h1 == 0:
+      if k is False:
+        k = True
         h1 = self._height2(i)+1
-      else:
-        h2= self._height2(i)+1
-        if (-1 <= (h2- h1 ) <= 1):
-          return True
-        else:
-          return False
+      else :
+        h2 = self._height2(i)+1
+    if (-1 <= (h2- h1 ) <= 1):
+      return True
+    else:
+      return False
   
   def _rebalance(self, p):
     
